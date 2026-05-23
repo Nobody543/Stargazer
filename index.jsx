@@ -4,7 +4,6 @@ import { useState, useEffect, useRef, useMemo, useCallback } from "react";
    DATA
 ═══════════════════════════════════════════════════════════════ */
 const CONSTELLATIONS = [
-const CONSTELLATIONS = [
   {
     id:"orion", name:"Orion", meaning:"The Hunter", ra:83.82, dec:5.0, difficulty:1,
     description:"The most recognised constellation in the sky. Three belt stars in a diagonal line are its unmistakable signature.",
@@ -216,8 +215,6 @@ const CONSTELLATIONS = [
   },
 ];
 
-];
-
 const LEARNING_ORDER = [
   'ursa_major','cassiopeia','perseus','taurus','orion',
   'gemini','leo','bootes','virgo','lyra','cygnus','scorpius',
@@ -379,21 +376,6 @@ function sm2Update(card, grade) {
 }
 function initSRS() {
   return Object.fromEntries(CONSTELLATIONS.map(c => [c.id, { easiness:2.5, interval:1, repetitions:0, nextReview:0 }]));
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   HELPERS — journey map
-═══════════════════════════════════════════════════════════════ */
-function randomChoices(correctId) {
-  const others = CONSTELLATIONS.filter(c=>c.id!==correctId).sort(()=>Math.random()-0.5).slice(0,3).map(c=>c.id);
-  return [correctId, ...others].sort(()=>Math.random()-0.5);
-}
-function starMapPos(constId, starId) {
-  const c   = CONSTELLATIONS.find(x=>x.id===constId);
-  const pos = MAP_POS[constId];
-  const s   = c && c.stars.find(x=>x.id===starId);
-  if (!c||!pos||!s) return null;
-  return { x: pos.x - CX + s.x*CS, y: pos.y - CY + s.y*CS };
 }
 
 /* ═══════════════════════════════════════════════════════════════
